@@ -1,5 +1,5 @@
 <div class="btn-group message_menu_wrap mb-2" data-toggle="tooltip" title="通知リスト表示できます">
-	<button type="button" class="btn btn-success dropdown-toggle"
+	<button type="button" class="btn btn-info dropdown-toggle"
 	data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		<?= count($messages) ?>
 		<?php //var_dump( count($messages) ); ?>

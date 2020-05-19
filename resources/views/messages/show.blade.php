@@ -22,7 +22,7 @@
 		<div class="form-group">
 			{!! Form::label('content', '本文:', ['class' => 'col-sm-3 control-label']) !!}
 			<div class="col-sm-6">
-				<pre class="pre_text">{{ $message->content }}</pre>
+				<pre class="pre_text"><?= $message->content ?></pre>
 			</div>
 		</div>
 	</div>

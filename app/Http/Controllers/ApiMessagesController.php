@@ -47,6 +47,12 @@ class ApiMessagesController extends Controller
 		foreach($messages as $item ){
 			$dt = new Carbon($item["created_at"]);
 			$item["date_str"] = $dt->format('m-d H:i');
+			/*
+			$body = $item["body"];
+			$body = preg_replace('/(https?|ftp)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/', 
+			'<A href="\\1\\2">\\1\\2</A>', $body);
+			$item["body_org"] = $body;			
+			*/
 			$post_items[] = $item;
 		}
 		return $post_items;

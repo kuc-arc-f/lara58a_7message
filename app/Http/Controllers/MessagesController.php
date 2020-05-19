@@ -62,12 +62,16 @@ class MessagesController extends Controller
 		$message["status"] = 2;
 		$message->save();
 
+		$content = preg_replace('/(https?|ftp)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/', 
+		'<A href="\\1\\2">\\1\\2</A>', $message->content );
+//		$message["content"] = nl2br($content);
+		$message["content"] = $content;
 		$to_user = User::where('id', $message->to_id)
 		->first();
 		$from_user = User::where('id', $message->from_id )
 		->first();
-//debug_dump($to_user );
-// exit();
+//debug_dump($message );
+//exit();
 		return view('messages/show')->with(compact(
 			'message','to_user' ,'from_user'
 		));        
