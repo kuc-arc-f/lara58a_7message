@@ -70,7 +70,7 @@
 @include('element.page_info',
 [
 	'git_url' => 'https://github.com/kuc-arc-f/lara58a_7message',
-	'blog_url' => ' '
+	'blog_url' => 'https://knaka0209.hatenablog.com/entry/lara58_26message'
 ])
 <!-- -->
 <script>
