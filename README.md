@@ -32,6 +32,8 @@ php artisan serve
 ***
 ### blog
 
+https://knaka0209.hatenablog.com/entry/lara58_26message
+
 ***
 ### version / branch
 
