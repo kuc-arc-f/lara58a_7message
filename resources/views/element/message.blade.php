@@ -12,7 +12,7 @@
 				<span class="notify_menu_text mb-0">
 					{{$message->name}}<br />
 					{{$message->title}}<br />
-					{{$message->created_at}}<br />
+					{{$message->date_str}}<br />
 				</span>
 			</a>
 			<div class="dropdown-divider notify_menu_line mt-0 mb-0"></div>
