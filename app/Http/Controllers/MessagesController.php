@@ -104,6 +104,21 @@ class MessagesController extends Controller
         $message->delete();
         session()->flash('flash_message', '削除が完了しました');
         return redirect()->route('messages.index');
-    }	
+	}	
+	/**************************************
+     *
+     **************************************/
+	public function reply()
+	{
+		if (isset($_GET['id'])){
+			$message = Message::find($_GET['id']);
+			$message->content = "";
+			$from_user = User::where('id', $message->from_id )
+			->first();
+//debug_dump($message );
+//exit();
+		}
+		return view('messages/reply')->with(compact('message', 'from_user') );
+	}
 
 }

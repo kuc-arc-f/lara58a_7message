@@ -35,8 +35,13 @@
                 {{ Form::hidden('id', $message->id) }}
                 {{ Form::submit('Delete', ['class' => 'btn btn-outline-danger btn-sm']) }}
                 {{ Form::close() }}
-            </div>			
+			</div>
+		<?php }else{ ?>			
+			<a href="/messages/reply?id=<?= $message->id ?>"
+				 class="btn btn-outline-primary">Reply
 		<?php } ?>
+
+		</a>
 	</div>
 </div>
 <!-- -->

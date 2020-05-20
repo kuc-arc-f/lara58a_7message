@@ -56,6 +56,7 @@ Route::post('/chats/search_index', 'ChatsController@search_index')->name('chats.
 Route::resource('chats', 'ChatsController');
 //messages
 Route::get('/messages/show_sent', 'MessagesController@show_sent')->name('messages.show_sent');
+Route::get('/messages/reply', 'MessagesController@reply')->name('messages.reply');
 Route::resource('messages', 'MessagesController');
 //
 Auth::routes();
