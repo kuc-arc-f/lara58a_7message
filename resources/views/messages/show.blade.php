@@ -10,9 +10,11 @@
 			['class' => 'btn btn-outline-primary'] ) }}
 		</div>
 		<div class="col-sm-6">
-			<a href="/messages/reply?id=<?= $message->id ?>" class="btn btn-primary">
-				<i class="fas fa-reply"></i> Reply
-			</a>
+			<?php if(isset($edit_mode) == false){ ?>
+				<a href="/messages/reply?id=<?= $message->id ?>" class="btn btn-primary">
+					<i class="fas fa-reply"></i> Reply
+				</a>
+			<?php } ?>
 		</div>
 	</div>
 	<hr class="mt-2 mb-2">
@@ -24,6 +26,7 @@
 			Date : {{ $message->created_at }} <br />
 			from : <?= $from_user->name ?> / <?= $from_user->email ?><br />
 			To : <?= $to_user->name ?> / <?= $to_user->email ?> <br />
+			ID : {{ $message->id }} <br />
 		</p>
 		<hr />
 	</div>
