@@ -90,6 +90,21 @@ class ApiMessagesController extends Controller
 		->first();
 		return response()->json($user );
 	}
+	/**************************************
+	 *
+	 **************************************/
+	public function get_last_item(Request $request)
+	{   
+		$data = $request->all();
+		$messages = Message::select([
+			'messages.id',
+			'messages.title',
+		])
+		->orderBy('id', 'desc')
+		->where('to_id' , $data["user_id"] )
+		->first();
+		return response()->json($messages );
+	}
 
 
 }

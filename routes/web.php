@@ -110,6 +110,7 @@ Route::prefix('api')->group(function(){
     Route::post('/apichats/update_post', 'ApiChatsController@update_post');
     Route::post('/apichats/delete_post', 'ApiChatsController@delete_post');
     // messages
+    Route::post('/apimessages/get_last_item', 'ApiMessagesController@get_last_item');
     Route::post('/apimessages/get_item', 'ApiMessagesController@get_item');
     Route::post('/apimessages/get_sent_item', 'ApiMessagesController@get_sent_item');
     Route::post('/apimessages/get_user', 'ApiMessagesController@get_user');

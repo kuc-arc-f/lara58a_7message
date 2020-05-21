@@ -28,43 +28,40 @@
 					</a>
 				</li>
 			</ul>
+			<ul class="ul_post_box" style="list-style: none;">
+				<li v-for="item in items" v-bind:key="item.id">
+					<div class="title_wrap">
+						<span v-if="item.status==1" >
+							<i class="far fa-envelope"></i>
+						</span>
+						<span v-if="mode==1">
+							<a v-bind:href="'/messages/' + item.id">
+								@{{ item.title }}
+							</a>
+							<br />
+						</span>
+						<span v-else>
+							<a v-bind:href="'/messages/show_sent?id=' + item.id">
+								@{{ item.title }}
+							</a>
+							<br />
+						</span>	
+						<!-- date -->
+						<span class="date_str" style="margin-top:0px;">@{{ item.date_str }}
+						</span>
+						<span v-if="mode==1" class="date_str">, from @{{item.user_name}}
+						</span>							
+						<span v-if="mode==2" class="date_str">
+							, To @{{item.user_name}}
+						</span>	
+						<span class="date_str">
+							, ID: @{{ item.id }}
+						</span>
+										
+					</div>
+				</li>
+			</ul>
 
-			<table class="table table-striped item-table">
-				<thead>
-					<th>ID</th>
-					<th>Title</th>
-				</thead>
-				<tbody>
-					<tr v-for="item in items" v-bind:key="item.id">
-						<td class="table-text">@{{ item.id }}
-						</td>
-						<td class="table-text col_title">
-							<div class="title_wrap">
-								<span v-if="item.status==1" >
-									<i class="far fa-envelope"></i>
-								</span>
-								<span v-if="mode==1">
-									<a v-bind:href="'/messages/' + item.id">
-										@{{ item.title }}
-									</a>
-								</span>
-								<span v-else>
-									<a v-bind:href="'/messages/show_sent?id=' + item.id">
-										@{{ item.title }}
-									</a>
-								</span>								
-							</div>
-							<span class="date_str" style="margin-top:0px;">@{{ item.date_str }}
-							</span>
-							<span v-if="mode==1" class="date_str">, from @{{item.user_name}}
-							</span>							
-							<span v-if="mode==2" class="date_str">
-								, To @{{item.user_name}}
-							</span>							
-						</td>
-					</tr>                    
-				</tbody>
-			</table>
 		</div>
 	</div>
 </div>
@@ -72,8 +69,8 @@
 <br />
 @include('element.page_info',
 [
-	'git_url' => ' ',
-	'blog_url' => ' '
+	'git_url' => 'https://github.com/kuc-arc-f/lara58a_7message',
+	'blog_url' => 'https://knaka0209.hatenablog.com/entry/lara58_26message'
 ])
 <!-- -->
 <script>
@@ -133,15 +130,26 @@ console.log(type );
 </script>
 <!-- -->
 <style>
+/*
 .item-table .col_title{
-	font-size: 1.4rem;
+font-size: 1.4rem;
 }
 .item-table .from_user_name{
-	font-size: 1.2rem;
-	/* margin-left: 32px; */
+font-size: 1.2rem;
 }
 .item-table .date_str{ font-size: 0.84rem; }
 .item-table td{ padding : 8px;}
+.ul_post_box li{
+	font-size: 1.4rem;	
+}
+*/
+.ul_post_box .date_str{ font-size: 0.84rem; }
+.ul_post_box .title_wrap{
+	/* font-size: 18px; */
+	font-size: 1.32rem;
+	border-bottom: 1px solid #000; 
+	margin-top: 8px;
+}
 </style>
 
 @endsection

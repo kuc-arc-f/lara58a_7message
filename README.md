@@ -1,10 +1,12 @@
 ﻿# lara58a_7message
 
- Version: 0.9.2
+ Version: 0.9.3
 
  Author  : Kouji Nakashima / kuc-arc-f.com
 
  date    : 2020/05/19
+
+ update  : 2020/05/21
 
 ***
 
@@ -37,5 +39,6 @@ https://knaka0209.hatenablog.com/entry/lara58_26message
 ***
 ### version / branch
 
+* v0_9_2 : beta version
 
 ***
