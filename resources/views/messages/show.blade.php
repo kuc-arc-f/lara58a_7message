@@ -3,9 +3,18 @@
 @section('title', '')
 
 @section('content')
-<div class="panel panel-default">
-	<br />
-	{{ link_to_route('messages.index', '戻る', null, ['class' => 'btn btn-outline-primary'] ) }}
+<div class="panel panel-default" style="padding-top: 10px;">
+	<div class="row">
+		<div class="col-sm-6">
+			{{ link_to_route('messages.index', '戻る', null, 
+			['class' => 'btn btn-outline-primary'] ) }}
+		</div>
+		<div class="col-sm-6">
+			<a href="/messages/reply?id=<?= $message->id ?>" class="btn btn-primary">
+				<i class="fas fa-reply"></i> Reply
+			</a>
+		</div>
+	</div>
 	<hr class="mt-2 mb-2">
 	<div class="panel-heading">
 		<h3 >{{ $message->title }} </h3>
@@ -13,8 +22,8 @@
 			<?php //var_dump($to_user);
 			?>
 			Date : {{ $message->created_at }} <br />
-			from : <?= $from_user->name ?><br />
-			To : <?= $to_user->name ?><br />
+			from : <?= $from_user->name ?> / <?= $from_user->email ?><br />
+			To : <?= $to_user->name ?> / <?= $to_user->email ?> <br />
 		</p>
 		<hr />
 	</div>
@@ -36,12 +45,17 @@
                 {{ Form::submit('Delete', ['class' => 'btn btn-outline-danger btn-sm']) }}
                 {{ Form::close() }}
 			</div>
-		<?php }else{ ?>			
+		<?php }else{ ?>	
+			<a href="/messages/reply?id=<?= $message->id ?>" class="btn btn-primary">
+				<i class="fas fa-reply"></i> Reply
+			</a>
+			<!-- 
 			<a href="/messages/reply?id=<?= $message->id ?>"
 				 class="btn btn-outline-primary">Reply
+			</a>
+			-->					
 		<?php } ?>
 
-		</a>
 	</div>
 </div>
 <!-- -->
