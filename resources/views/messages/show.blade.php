@@ -40,6 +40,15 @@
 	</div>
 	<hr />
 	<div class="panel-footer">
+		<?php if(empty($message_file) == false){ ?>
+			Attach file :
+			<a href="/files/message_files/<?= $message_file->name ?>"
+				data-toggle="tooltip" title="Attach file download"
+				class="btn btn-outline-primary">
+				<i class="fas fa-paperclip"></i> File 
+			</a>
+			<hr />
+		<?php }?>
 		<?php if(isset($edit_mode)){ ?>
             <!-- delete -->
             <div class="form-group">
@@ -52,11 +61,6 @@
 			<a href="/messages/reply?id=<?= $message->id ?>" class="btn btn-primary">
 				<i class="fas fa-reply"></i> Reply
 			</a>
-			<!-- 
-			<a href="/messages/reply?id=<?= $message->id ?>"
-				 class="btn btn-outline-primary">Reply
-			</a>
-			-->					
 		<?php } ?>
 
 	</div>

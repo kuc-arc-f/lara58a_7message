@@ -55,6 +55,7 @@ Route::get('/chats/test', 'ChatsController@test')->name('chats.test');
 Route::post('/chats/search_index', 'ChatsController@search_index')->name('chats.search_index');
 Route::resource('chats', 'ChatsController');
 //messages
+//Route::post('/messages/uploaad_file', 'MessagesController@uploaad_file')->name('messages.uploaad_file');
 Route::get('/messages/show_sent', 'MessagesController@show_sent')->name('messages.show_sent');
 Route::get('/messages/reply', 'MessagesController@reply')->name('messages.reply');
 Route::resource('messages', 'MessagesController');

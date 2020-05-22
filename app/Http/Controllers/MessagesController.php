@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use App\Message;
+use App\MessageFile;
 use App\User;
 
 //
@@ -31,6 +34,7 @@ class MessagesController extends Controller
 	 **************************************/
 	public function create()
 	{
+//exit();
 		return view('messages/create')->with('message', new Message());
 	}	
 	/**************************************
@@ -40,17 +44,62 @@ class MessagesController extends Controller
 	{
 		$user_id = Auth::id();
 		$data = $request->all();
+
 		$message = new Message();
 		$message["user_id"]= $user_id;
 		$message["from_id"]= $user_id;
 		$message["type"]= 1;
 		$message["status"]= 1;
 		$message->fill($data );
-//debug_dump($message );
-//exit();				
 		$message->save();
-		session()->flash('flash_message', 'complete, message save');
+		$ret = true;
+		if(isset($data["attach_file"])){
+			$validator = Validator::make($request->all(), [
+//				'attach_file' => 'required|max:1024'
+				'attach_file' => 'required|max:512'
+			]);
+			if ($validator->fails())
+			{
+				session()->flash('flash_message', 'ファイルアップロードに失敗しました。');
+				return back()->withInput()->withErrors($validator);
+			}			
+//debug_dump($data["attach_file"]);
+			$ret = $this->upload_file($request, $message->id );
+		}
+// exit();							
+		if($ret == false){
+			session()->flash('flash_message', 'ファイルアップロードに失敗しました。');
+			return redirect()->back()->withErrors($errors)->withInput();
+		}else{
+			session()->flash('flash_message', 'complete, message save');
+		}
 		return redirect()->route('messages.index');
+	}
+	/**************************************
+	 *
+     **************************************/
+	private function upload_file(Request $request, $message_id ){
+		$ret = true;
+//		$datetime = strtotime(date('YmdHis'));
+		$temporary_file = $request->file('attach_file')->store('message_files_tmp');
+		$origiinal_name = $request->file('attach_file')->getClientOriginalName();
+//var_dump( "temporary_file=". $temporary_file );
+//var_dump($origiinal_name );
+		$filename = $message_id."_" . $origiinal_name;
+//var_dump($temporary_file );
+		$storage_path = storage_path('app/') . $temporary_file;
+		// $public_path = public_path() . "/files/" . $origiinal_name;
+		Storage::copy($temporary_file , 'message_files/' . $filename );
+		//delete
+		Storage::delete($temporary_file );
+
+		// fname-save
+		$message_file = new MessageFile();
+		$message_file["message_id"]= $message_id;
+		$message_file["name"]= $filename;
+		$message_file->save();
+
+		return $ret;
 	}
 	/**************************************
 	 *
@@ -70,10 +119,12 @@ class MessagesController extends Controller
 		->first();
 		$from_user = User::where('id', $message->from_id )
 		->first();
-//debug_dump($message );
+		// MessageFile
+		$message_file = MessageFile::where('message_id', $id )
+		->first();
 //exit();
-		return view('messages/show')->with(compact(
-			'message','to_user' ,'from_user'
+return view('messages/show')->with(compact(
+			'message','to_user' ,'from_user', 'message_file'
 		));        
 	} 
 	/**************************************
@@ -90,8 +141,13 @@ class MessagesController extends Controller
 			->first();			
 //debug_dump($message );
 // exit();
+		// MessageFile
+		$message_file = MessageFile::where('message_id', $_GET['id'] )
+		->first();
+
 			return view('messages/show')->with(compact(
-				'message','to_user' ,'from_user','edit_mode'
+				'message','to_user' ,'from_user','edit_mode',
+				'message_file'
 			));        
 		}
 	}	 
@@ -120,5 +176,6 @@ class MessagesController extends Controller
 		}
 		return view('messages/reply')->with(compact('message', 'from_user') );
 	}
+	// 
 
 }
