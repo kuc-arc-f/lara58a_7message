@@ -19,7 +19,25 @@
 				</div>
 			</div> 
 		</div>
-		<hr class="mt-2 mb-2">
+		<hr class="mb-2 mt-2" />
+		<div class="search_wrap">
+			<div class="row  mb-2" >            
+				<div class="col-sm-4">
+					<input type="text" class="form-control" placeholder="title"
+					v-model="search_key">
+				</div>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" placeholder="mail"
+					v-model="search_mail">
+				</div>				
+				<div class="col-sm-4">
+					<a href="#" class="btn btn-outline-primary btn-sm"
+					v-on:click="searchTasks()" >Search
+					</a>
+				</div>
+			</div>		
+		</div>
+		<!-- <hr class="mt-2 mb-2"> style="margin-top: 10px;" -->
 		<div class="panel-body">
 			<ul class="nav nav-tabs">
 				<li class="nav-item">
@@ -161,6 +179,8 @@ new Vue({
 		timerObj : null,
 		mode : MODE_RECEIVE,
 		flash_message : "",
+		search_key : "",
+		search_mail : "",
 	},
 	methods: {
 		get_items(USER_ID) {
@@ -188,15 +208,18 @@ new Vue({
 			});
 		}, 
 		change_type: function(type) {
-console.log(type );
+// console.log(type );
 			if(type == MODE_RECEIVE){
+				$('.search_wrap').css('display','inherit');
 				$('#nav_receive_tab').addClass('active');
 				$('#nav_sent_tab').removeClass('active');	
 				this.get_items(USER_ID);			
 			}else{
+
 				$('#nav_sent_tab').addClass('active');
 				$('#nav_receive_tab').removeClass('active');
 				this.get_sent_item();
+				$('.search_wrap').css('display','none');
 			}
 		},
 		count: function() {
@@ -217,7 +240,19 @@ console.log(type );
 			var self = this;
 			this.timerObj = null;
 			this.timerObj = setInterval(function() {self.count()}, 10000)
-		},		
+		},
+        searchTasks(){
+            var data = {
+                'search_key': this.search_key,
+				'user_id': USER_ID,
+				'search_mail' : this.search_mail,
+            };
+            axios.post('/api/apimessages/search' , data ).then(res => {
+console.log(res.data );
+                this.items = res.data
+//                this.convert_todos(this.items, this.complete)
+            });
+        },				
 	}
 });
 </script>

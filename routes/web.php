@@ -56,6 +56,7 @@ Route::post('/chats/search_index', 'ChatsController@search_index')->name('chats.
 Route::resource('chats', 'ChatsController');
 //messages
 //Route::post('/messages/uploaad_file', 'MessagesController@uploaad_file')->name('messages.uploaad_file');
+//Route::post('/messages/search_index', 'MessagesController@search_index')->name('messages.search_index');
 Route::get('/messages/show_sent', 'MessagesController@show_sent')->name('messages.show_sent');
 Route::get('/messages/reply', 'MessagesController@reply')->name('messages.reply');
 Route::resource('messages', 'MessagesController');
@@ -115,6 +116,7 @@ Route::prefix('api')->group(function(){
     Route::post('/apimessages/get_item', 'ApiMessagesController@get_item');
     Route::post('/apimessages/get_sent_item', 'ApiMessagesController@get_sent_item');
     Route::post('/apimessages/get_user', 'ApiMessagesController@get_user');
+    Route::post('/apimessages/search', 'ApiMessagesController@search');
 
     //sys
     Route::post('/apisystem/delete_db_day', 'ApiSystemController@delete_db_day');

@@ -123,9 +123,9 @@ class MessagesController extends Controller
 		$message_file = MessageFile::where('message_id', $id )
 		->first();
 //exit();
-return view('messages/show')->with(compact(
-			'message','to_user' ,'from_user', 'message_file'
-		));        
+		return view('messages/show')->with(compact(
+					'message','to_user' ,'from_user', 'message_file'
+				));        
 	} 
 	/**************************************
 	 * 送信者から、詳細表示
