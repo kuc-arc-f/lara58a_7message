@@ -20,8 +20,16 @@
 			</div> 
 		</div>
 		<hr class="mb-2 mt-2" />
-		<div class="search_wrap">
-			<div class="row  mb-2" >            
+		<!-- 
+		<p class="serach_display_btn"><i class="fas fa-arrow-down "></i>
+			Search<br />
+		</p>
+		-->
+		<a href="#" class="btn btn-sm btn-outline-primary serach_display_btn mb-0">
+			<i class="fas fa-arrow-down serach_display_btn"></i>&nbsp;Search
+		</a>
+		<div class="search_wrap mt-2" style="display: none; ">
+			<div class="row  mb-0" >            
 				<div class="col-sm-4">
 					<input type="text" class="form-control" placeholder="title"
 					v-model="search_key">
@@ -31,12 +39,13 @@
 					v-model="search_mail">
 				</div>				
 				<div class="col-sm-4">
-					<a href="#" class="btn btn-outline-primary btn-sm"
-					v-on:click="searchTasks()" >Search
+					<a href="#" class="btn btn-primary btn-sm"
+					v-on:click="searchTasks()" >Search Go
 					</a>
 				</div>
 			</div>		
 		</div>
+		<hr class="mb-2 mt-2" />
 		<!-- <hr class="mt-2 mb-2"> style="margin-top: 10px;" -->
 		<div class="panel-body">
 			<ul class="nav nav-tabs">
@@ -254,6 +263,12 @@ console.log(res.data );
             });
         },				
 	}
+});
+$(function(){
+	$( '.serach_display_btn' ).click( function() {
+		// alert('serach_display_btn');
+		$('.search_wrap').css('display','inherit');
+	});
 });
 </script>
 <!-- -->
