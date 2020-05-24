@@ -7,6 +7,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 use App\Message;
 use App\MessageFile;
 use App\User;
@@ -176,6 +177,76 @@ class MessagesController extends Controller
 		}
 		return view('messages/reply')->with(compact('message', 'from_user') );
 	}
-	// 
+	/**************************************
+     *
+     **************************************/
+	public function export(){
+		if (isset($_GET['id'])){
+			$id  = $_GET['id'];
+			$message = Message::find($id);
+			$dt = new Carbon($message->created_at);
+			$datetime = $dt->format('Ymd_Hi');
+
+			$to_user = User::where('id', $message->to_id)
+			->first();
+			$from_user = User::where('id', $message->from_id )
+			->first();			
+			//text-get
+			$stream = fopen('php://temp', 'r+b');
+			fwrite($stream, "Title : " . $message->title . "\r\n" );
+			fwrite($stream, "Created : " . $message->created_at . "\r\n" );
+			fwrite($stream, "From : " . $from_user->name . "\r\n" );
+			fwrite($stream, "To : " . $to_user->name . "\r\n" );
+			fwrite($stream, "ID : " . $message->id . "\r\n" );
+			fwrite($stream, "=========================\r\n" );
+			fwrite($stream, $message->content . "\r\n" );
+			rewind($stream);
+//			$csv = str_replace(PHP_EOL, "\r\n", stream_get_contents($stream));
+			$csv = stream_get_contents($stream);
+			$attachment = "attachment; filename=message_{$datetime}.txt";
+//var_dump( $s );
+//exit();
+			return response($csv )
+				->withHeaders([
+					'Content-Type' => 'text/csv',
+					'Content-Disposition' => $attachment,
+				]);			
+			exit();
+		}
+	}
+	/**************************************
+     *
+     **************************************/
+	public function test(){
+		$messages = Message::orderBy('id', 'asc')->get();
+		foreach($messages as $message ){
+			$message_file = MessageFile::where('message_id', $message->id )
+			->first();
+			if(empty($message_file) == false){
+//debug_dump($message_file->name );
+//				$storage_path = storage_path('app/') . "message_files/" . $message_file->name;
+				$storage_path = "message_files/" . $message_file->name;
+//debug_dump($storage_path );
+				Storage::delete($storage_path );
+			}
+
+		}
+		//db-delete
+		foreach($messages as $message ){
+			$message = Message::find($message->id );
+//debug_dump($message->id );
+			$message_file = MessageFile::where('message_id', $message->id )
+			->first();
+			if(empty($message_file) == false){
+//debug_dump($message_file->id );
+				$message_fileOne = MessageFile::find($message_file->id );
+debug_dump($message_fileOne->id );
+				$message_fileOne->delete();
+			}
+			$message->delete();
+		}
+exit();
+
+	}
 
 }

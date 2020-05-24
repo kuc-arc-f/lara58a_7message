@@ -8,14 +8,20 @@
 		id="message_index_flash_wrap" style="display: none;">
 		<p class="mb-0" id="message_index_flash">@{{flash_message}}</p>
 	</div>	
-	<div class="panel panel-default">
+	<div class="panel panel-default" style="margin-top: 10px;">
 		<div class="panel-heading">
 			<div class="row">
-				<div class="col-sm-6"><h3>Messages - index</h3>
+				<!--  - index -->
+				<div class="col-sm-4"><h3>Messages</h3>
 				</div>
-				<div class="col-sm-6" style="text-align: right;">
+				<div class="col-sm-4" style="">
 					{{ link_to_route('messages.create', 'Create' ,null, 
 					['class' => 'btn btn-primary']) }}
+				</div>
+				<div class="col-sm-4" style="text-align: right;">
+					<a href="#" class="btn btn-sm btn-outline-primary serach_display_btn mb-0">
+						<i class="fas fa-arrow-down serach_display_btn"></i>&nbsp;Search
+					</a>
 				</div>
 			</div> 
 		</div>
@@ -25,9 +31,6 @@
 			Search<br />
 		</p>
 		-->
-		<a href="#" class="btn btn-sm btn-outline-primary serach_display_btn mb-0">
-			<i class="fas fa-arrow-down serach_display_btn"></i>&nbsp;Search
-		</a>
 		<div class="search_wrap mt-2" style="display: none; ">
 			<div class="row  mb-0" >            
 				<div class="col-sm-4">
@@ -44,8 +47,8 @@
 					</a>
 				</div>
 			</div>		
+			<hr class="mb-2 mt-2" />
 		</div>
-		<hr class="mb-2 mt-2" />
 		<!-- <hr class="mt-2 mb-2"> style="margin-top: 10px;" -->
 		<div class="panel-body">
 			<ul class="nav nav-tabs">

@@ -55,10 +55,11 @@ Route::get('/chats/test', 'ChatsController@test')->name('chats.test');
 Route::post('/chats/search_index', 'ChatsController@search_index')->name('chats.search_index');
 Route::resource('chats', 'ChatsController');
 //messages
-//Route::post('/messages/uploaad_file', 'MessagesController@uploaad_file')->name('messages.uploaad_file');
 //Route::post('/messages/search_index', 'MessagesController@search_index')->name('messages.search_index');
+//Route::get('/messages/test', 'MessagesController@test')->name('messages.test');
 Route::get('/messages/show_sent', 'MessagesController@show_sent')->name('messages.show_sent');
 Route::get('/messages/reply', 'MessagesController@reply')->name('messages.reply');
+Route::get('/messages/export', 'MessagesController@export')->name('messages.export');
 Route::resource('messages', 'MessagesController');
 //
 Auth::routes();

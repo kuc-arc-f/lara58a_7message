@@ -10,16 +10,27 @@
 			['class' => 'btn btn-outline-primary'] ) }}
 		</div>
 		<div class="col-sm-6">
-			<?php if(isset($edit_mode) == false){ ?>
-				<a href="/messages/reply?id=<?= $message->id ?>" class="btn btn-primary">
-					<i class="fas fa-reply"></i> Reply
-				</a>
-			<?php } ?>
 		</div>
 	</div>
 	<hr class="mt-2 mb-2">
 	<div class="panel-heading">
-		<h3 >{{ $message->title }} </h3>
+		<div class="row">
+			<div class="col-sm-6">
+				<h3 >{{ $message->title }} </h3>
+			</div>
+			<div class="col-sm-6">
+				<?php if(isset($edit_mode) == false){ ?>
+					<a href="/messages/reply?id=<?= $message->id ?>" class="btn btn-primary btn-sm"
+						data-toggle="tooltip" title="reply message">
+						<i class="fas fa-reply"></i> Reply
+					</a>
+				<?php } ?>
+				<a href="/messages/export?id=<?= $message->id ?>" class="btn btn-outline-primary btn-sm"
+					data-toggle="tooltip" title="export text file">
+					<i class="fas fa-download"></i> &nbsp;export
+				</a>
+			</div>
+		</div>
 		<p>
 			<?php //var_dump($to_user);
 			?>
