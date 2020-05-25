@@ -37,6 +37,26 @@ php artisan serve
 https://knaka0209.hatenablog.com/entry/lara58_26message
 
 ***
+### UI
+
+* receive / index
+![ img-1 ](https://raw.githubusercontent.com/kuc-arc-f/screen-img/master/web/ss-message-receive-0524.png)
+
+* create message, attache file
+![ img-1 ](https://raw.githubusercontent.com/kuc-arc-f/screen-img/master/web/ss-create-file-0522b.png)
+
+* notification display ,auto update
+
+![ img-1 ](https://raw.githubusercontent.com/kuc-arc-f/screen-img/master/web/ss-msg-notification.png)
+
+* replay message
+![ img-1 ](https://raw.githubusercontent.com/kuc-arc-f/screen-img/master/web/ss-meg-rep-0524.png)
+
+* message export, text file
+
+![ img-1 ](https://raw.githubusercontent.com/kuc-arc-f/screen-img/master/web/ss-expurt-0524b.png)
+
+***
 ### version / branch
 
 * v0_9_2 : beta version
