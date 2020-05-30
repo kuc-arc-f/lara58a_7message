@@ -6,11 +6,17 @@
 
  date    : 2020/05/19
 
- update  : 2020/05/23
+ update  : 2020/05/30
 
 ***
 
 Laravel 5.8, message app sample
+
+* PWA 対応
+
+* Google ログイン対応
+
+* 通知APIでの、新着　自動通知可能。
 
 ***
 ### setup
@@ -35,6 +41,11 @@ php artisan serve
 ### blog
 
 https://knaka0209.hatenablog.com/entry/lara58_26message
+
+* chat設定ですが、参考の .env 設定
+
+https://knaka0209.hatenablog.com/entry/lara58_25chat
+
 
 ***
 ### UI
