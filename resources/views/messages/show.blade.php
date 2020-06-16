@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '')
+@section('title', "show" )
 
 @section('content')
 <div class="panel panel-default" style="padding-top: 10px;">
@@ -35,7 +35,9 @@
 			<?php //var_dump($to_user);
 			?>
 			Date : {{ $message->created_at }} <br />
-			from : <?= $from_user->name ?> / <?= $from_user->email ?><br />
+			<?php if(empty($from_user) == false){ ?>
+				from : <?= $from_user->name ?> / <?= $from_user->email ?><br />
+			<?php } ?>
 			To : <?= $to_user->name ?> / <?= $to_user->email ?> <br />
 			ID : {{ $message->id }} <br />
 		</p>
@@ -44,7 +46,7 @@
 	<div class="panel-body">
 		<div class="form-group">
 			{!! Form::label('content', '本文:', ['class' => 'col-sm-3 control-label']) !!}
-			<div class="col-sm-6">
+			<div class="col-sm-8">
 				<pre class="pre_text"><?= $message->content ?></pre>
 			</div>
 		</div>
